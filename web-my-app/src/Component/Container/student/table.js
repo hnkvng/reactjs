@@ -29,7 +29,9 @@ function Table() {
                 </table>
             </div>
             <ul>
-                <span>*Chú thích:</span>
+                <span>
+                    <strong>*Chú giải:</strong>
+                </span>
                 <li>QT: điểm quá trình</li>
                 <li>GK: điểm giữa kì</li>
                 <li>CK: điểm cuối kì</li>

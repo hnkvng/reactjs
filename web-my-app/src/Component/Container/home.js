@@ -1,7 +1,7 @@
 import React from 'react';
+import Started from './home/firtstarted';
 
 function Home() {
-    return <h1>Home</h1>;
+    return <Started></Started>;
 }
-
 export default Home;

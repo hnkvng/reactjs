@@ -18,7 +18,6 @@ function check(formdata) {
     checkNumInString(formdata.Name, value_error, value_success);
     checkCharInNum(formdata, value_error, value_success);
     checkMaxMinNumber(formdata, value_error, value_success);
-    console.log([value_error, value_success]);
     return [value_error, value_success];
 }
 function checkNumInString(data, value_error, value_success) {
@@ -51,13 +50,13 @@ function checkEmpty(data, value_error, value_success) {
 }
 function checkCharSpecial(datas, value_error, value_success) {
     for (let data in datas) {
-        const regex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/; //đoạn mã tìm kí tự đặc biệt trong chuỗi
-        const regexfornum = /[!@#$%^&*()_+{}\[\]:;<>,?~\\/-]/;
-        if (data == 'QT' || data == 'GK' || data == 'CK') {
+        const regex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/; //đoạn mã tìm kí tự đặc biệt trong chuỗi
+        const regexfornum = /[!@#$%^&*()_+{}[\]:;<>,?~\\/-]/;
+        if (data === 'QT' || data === 'GK' || data === 'CK') {
             if (regexfornum.test(datas[data])) {
                 value_error.CharSpecial.push(data);
             }
-        } else if (regex.test(datas[data]) && data != 'Date') {
+        } else if (regex.test(datas[data]) && data !== 'Date') {
             value_error.CharSpecial.push(data);
         } else {
             value_success.CharSpecial.push(data);
@@ -75,7 +74,7 @@ function checkMaxMinNumber(datas, value_error, value_success) {
     }
 }
 function addInfoError(len, target, classname, themeerror, themeinfo, info) {
-    if (len != 0) {
+    if (len !== 0) {
         for (let name of target) {
             classname = {
                 ...classname,

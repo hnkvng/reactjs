@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import styles from './main.module.css';
+import clsx from 'clsx';
 import axios from 'axios';
 
 function Body() {
     const [data, setData] = useState([]);
+    const classnameIcon1 = clsx('fa-solid fa-pen', styles.icon_1);
+    const classnameIcon2 = clsx('fa-solid fa-trash', styles.icon_2);
     useEffect(() => {
         async function axiosData() {
             await axios
@@ -29,7 +33,11 @@ function Body() {
             <td>{element.GK}</td>
             <td>{element.CK}</td>
             <td>{element.TB}</td>
-            <td>{element.Class}</td>
+            <td>
+                {element.Class}
+                <i className={classnameIcon1}></i>
+                <i className={classnameIcon2}></i>
+            </td>
         </tr>
     ));
 }
