@@ -1,0 +1,30 @@
+.form
+{
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    width: 848px;
+    height: 500px;
+    flex-wrap: wrap;
+}
+.form_group {
+    padding: 8px;
+    width: 400px;
+}
+.customs_button
+{
+    height: 50px;
+    width: 100px;
+}
+.success
+{
+    border: 1px solid rgb(57, 206, 132);
+}
+.error
+{
+    border: 1px solid red;
+}
+.info
+{
+    color: red;
+}
