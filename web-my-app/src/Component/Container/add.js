@@ -1,6 +1,6 @@
 import React from 'react';
-import FormAdd from './add/form';
+import Container from './add/container';
 function Add() {
-    return <FormAdd></FormAdd>;
+    return <Container></Container>;
 }
 export default Add;
