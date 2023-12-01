@@ -8,6 +8,13 @@ const props = {
         iconClose: <i className="fa-solid fa-xmark"></i>,
         theme: styles.toast_success,
     },
+    edit: {
+        info: 'Success',
+        des: 'Chỉnh sửa sinh viên thành công',
+        icon: <i class="fa-regular fa-pen-to-square"></i>,
+        iconClose: <i className="fa-solid fa-xmark"></i>,
+        theme: styles.toast_edit,
+    },
     error: {
         info: 'Error',
         des: 'Thêm sinh viên không thành công',

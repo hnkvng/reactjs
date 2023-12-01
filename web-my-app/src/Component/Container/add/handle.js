@@ -3,8 +3,9 @@ import { InitFormData } from './init';
 //Action
 const ADD_ACTITON = 'add';
 const CHANGE_ACTION = 'change';
-const INITIALIZE = 'default';
+const INITIALIZE = 'init';
 const CLEAR_DATA = 'clear';
+const CHANGE_ALL_ACTION = 'changeAll';
 //DATA
 const DATA = new InitFormData();
 //Data except
@@ -54,6 +55,7 @@ class Handle {
     setState(state, action) {
         switch (action.type) {
             case INITIALIZE:
+                DATA.clearData();
                 return DATA.getInfo();
             case CHANGE_ACTION:
                 const info = check.checkData(action.name, action.payload);
@@ -70,6 +72,9 @@ class Handle {
                 state = new InitFormData().getInfo();
                 DATA.clearData();
                 return state;
+            case CHANGE_ALL_ACTION:
+                state = DATA.changeFormData(action.payload);
+                return state;
             default:
                 throw new Error('Action invalid');
         }
@@ -78,10 +83,11 @@ class Handle {
 //check
 const check = new Handle();
 const dataCheck = new DataExcept();
+const formPayload = new Handle().setPayload;
 
 //function
 function testCase(name, checkData, data) {
-    const nameExcept = ['Class', 'QT', 'GK', 'CK', 'Date'];
+    const nameExcept = ['Class', 'QT', 'GK', 'CK', 'Birth'];
     const setInfo = check.setInfo;
     let checked = {};
     if (checkData[0].test(data[name])) {
@@ -100,7 +106,7 @@ function testCase(name, checkData, data) {
                 test: checkData[2].test(data[name]),
             };
             break;
-        case 'Date':
+        case 'Birth':
             checked = {
                 test:
                     new Date(data[name]).getFullYear() >
@@ -161,4 +167,4 @@ function sameId(formDataId, dataId) {
     return false;
 }
 
-export { Handle, test, sameId };
+export { Handle, test, sameId, formPayload };

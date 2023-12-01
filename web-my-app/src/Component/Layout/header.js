@@ -7,23 +7,19 @@ function Header() {
             <Nav>
                 <Nav.Item>
                     <Link to="/" className={styles.nav_link}>
-                        {' '}
-                        Trang chủ{' '}
+                        Trang chủ
                     </Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Link to="/student" className={styles.nav_link}>
-                        {' '}
-                        Sinh viên{' '}
+                        Sinh viên
                     </Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Link to="/student/add" className={styles.nav_link}>
-                        {' '}
-                        Thêm sinh viên{' '}
+                        Thêm sinh viên
                     </Link>
                 </Nav.Item>
-                <Nav.Item></Nav.Item>
             </Nav>
         </header>
     );

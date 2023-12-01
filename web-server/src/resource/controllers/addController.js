@@ -3,7 +3,7 @@ const Student = require('../models/student');
 // Điều khiển
 class addControllers {
     //[PORT] => http://localhost:3000/student/add
-    add(rep, res) {
+    add(rep, res, next) {
         const sum =
             parseInt(rep.body.QT) +
             parseInt(rep.body.GK) +
@@ -16,9 +16,7 @@ class addControllers {
             .then(() => {
                 res.send({ message: 'add successfully' });
             })
-            .catch((err) => {
-                res.json({ error: err.message });
-            });
+            .catch(next);
     }
 }
 

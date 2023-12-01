@@ -82,6 +82,14 @@
 {
     color: #47afd8;
 }
+.toast_edit
+{
+    border-color: #d847a8;
+}
+.toast_edit .toast_icon
+{
+    color: #d847a8;
+}
 .toast_error
 {
     border-color: #ff4621;

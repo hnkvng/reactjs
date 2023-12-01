@@ -1,25 +1,35 @@
-import FormAdd from './form';
+import FormAdd from '../add/form';
 import React, { useState, useEffect, useReducer } from 'react';
-import styles from './main.module.css';
+import { useParams } from 'react-router-dom';
+import styles from '../add/main.module.css';
 import clsx from 'clsx';
 import axios from 'axios';
-import Info from './info';
-import props from './info/props';
+import Info from '../add/info';
+import props from '../add/info/props';
 import { studentApi } from '../../../Api';
-import { InitFormData } from './init';
-import { Handle } from './handle';
+import { InitFormData } from '../add/init';
+import { Handle } from '../add/handle';
 
-function Container() {
+function Edit() {
+    const nameButton = 'Thay đổi';
+    const changeSubmit = false;
+    const { studentId } = useParams();
+    const [MSSV, setMSSV] = useState(null);
     const [formData, dispatch] = useReducer(
         new Handle().setState,
         new InitFormData().getInfo(),
     );
-    const nameButton = 'Thêm';
-    const changeSubmit = true;
+    const formPayload = new Handle().setPayload;
     const [info, setInfo] = useState(null);
     const [dataStudent, setDataStudent] = useState([]);
     const [elements, setElements] = useState([]);
     const formGroup = clsx('mb-3', [styles.form_group]);
+    const dataInfo = {
+        elements: [] && elements,
+        info: info,
+        setElements: setElements,
+    };
+
     const handleOclickchild = (event) => {
         const butt = event.target.closest('button');
         if (butt) {
@@ -27,7 +37,7 @@ function Container() {
                 setInfo(props.info);
             }
             if (butt.type === 'submit') {
-                setInfo(props.success);
+                setInfo(props.edit);
             }
             setElements([
                 ...elements,
@@ -64,15 +74,32 @@ function Container() {
         };
         getApi();
     }, []);
-    const dataInfo = {
-        elements: [] && elements,
-        info: info,
-        setElements: setElements,
-    };
-    const dataInput = {
+    useEffect(() => {
+        const uploadInfo = (student, id) => {
+            for (let param in student) {
+                if (student[param]._id === id) {
+                    const Birth = student[param].Birth;
+                    const [day, month, year] = Birth.split('/');
+                    const parsedDate = new Date(
+                        `${year}-${month}-${parseInt(day) + 1}`,
+                    );
+                    //[parsedDate.toISOString().split('T')[0]] change type Date become type string and get string at index 0
+                    const formattedDate = parsedDate
+                        .toISOString()
+                        .split('T')[0];
+                    student[param].Birth = formattedDate;
+                    dispatch(formPayload('', 'changeAll', student[param]));
+                    setMSSV(student[param].MSSV);
+                }
+            }
+        };
+        uploadInfo(dataStudent, studentId);
+    }, [dataStudent, studentId, formPayload]);
+    const dataEdit = {
         formData: formData,
         formGroup: formGroup,
         student: dataStudent,
+        MSSV: MSSV,
         nameButton: nameButton,
         changeSubmit: changeSubmit,
         eventChild: handleOclickchild,
@@ -81,8 +108,8 @@ function Container() {
     return (
         <div className={styles.container}>
             <Info {...dataInfo}></Info>
-            <FormAdd {...dataInput}></FormAdd>
+            <FormAdd {...dataEdit}></FormAdd>
         </div>
     );
 }
-export default Container;
+export default Edit;

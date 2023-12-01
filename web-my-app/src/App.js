@@ -7,6 +7,7 @@ import Student from './Component/Container/student.js';
 import Notpage from './Component/Container/notpage.js';
 import Header from './Component/Layout/header.js';
 import Footer from './Component/Layout/footer.js';
+import Edit from './Component/Container/student/edit.js';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="/student" element={<Student />} />
                     <Route path="/student/add" element={<Add />} />
+                    <Route path="/student/:studentId/edit" element={<Edit />} />
                     <Route path="*" element={<Notpage />} />
                 </Routes>
             </div>

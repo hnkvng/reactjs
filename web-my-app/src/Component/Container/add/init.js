@@ -1,13 +1,17 @@
 class InitFormData {
     #initFormData = {
+        STT: '',
+        _id: '',
         MSSV: '',
         Name: '',
-        Date: '',
+        Birth: '',
         Faculty: '',
         QT: '',
         GK: '',
         CK: '',
         Class: '',
+        createdAt: '',
+        updatedAt: '',
     };
     getInfo() {
         return this.#initFormData;
@@ -28,7 +32,7 @@ class InitFormData {
         this.#initFormData = {
             MSSV: '',
             Name: '',
-            Date: '',
+            Birth: '',
             Faculty: '',
             QT: '',
             GK: '',

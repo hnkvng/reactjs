@@ -8,7 +8,7 @@ const student = new Schema(
             trim: true,
         },
         Name: String,
-        Date: Date,
+        Birth: Date,
         Faculty: String,
         QT: {
             type: Number,
