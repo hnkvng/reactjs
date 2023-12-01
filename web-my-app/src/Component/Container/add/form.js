@@ -1,36 +1,29 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './main.module.css';
-import { Handle } from './handle';
-import { InitFormData, InitClassInput } from './init';
-import { addApi, studentApi } from '../../../Api';
+import { Handle, test, sameId } from './handle';
+import { InitFormData } from './init';
+import { addApi } from '../../../Api';
 import axios from 'axios';
 
-function test(data) {
-    for (let i in data) {
-        if (data[i] == '') {
-            return true;
-        }
-    }
-    return false;
-}
-
-function FormAdd({ formGroup }) {
+function FormAdd({ event, formGroup, student }) {
+    const target = useRef();
+    const [info, setInfo] = useState(null);
+    const formPayload = new Handle().setPayload;
+    const [styleInput, setStyleInput] = useState({});
+    const [isButtonDisabled, setButtonDisabled] = useState(true);
     const [formData, dispatch] = useReducer(
         new Handle().setState,
         new InitFormData().getInfo(),
     );
-    const [isButtonDisabled, setButtonDisabled] = useState(true);
-    // const [inputClass, setInputclass] = useState(new InitClassInput().getClass());
-    const formPayload = new Handle().setPayload;
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         dispatch(formPayload(name, 'change', { [name]: value }));
     };
     const handleKeydown = (event) => {
         if (event.keyCode === 190) {
-            //dấu .
+            //190:"."
             const { name, value } = event.target;
             dispatch(formPayload(name, 'change', { [name]: value + '.0' }));
         }
@@ -38,6 +31,7 @@ function FormAdd({ formGroup }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         dispatch(formPayload('', 'add', ''));
+        target.current.focus();
         try {
             const response = await axios.post(addApi, formData);
             console.log(response.data);
@@ -46,11 +40,27 @@ function FormAdd({ formGroup }) {
         }
     };
     const handleOnclick = () => {
+        target.current.focus();
         dispatch(formPayload('', 'clear', ''));
     };
     useEffect(() => {
-        setButtonDisabled(test(formData));
-    }, [formData]);
+        if (sameId(formData.MSSV, student)) {
+            setStyleInput({ border: '1px solid red' });
+            setInfo(
+                <small className={styles.log_info}>
+                    Mã số sinh viên đã tồn tại
+                </small>,
+            );
+            setButtonDisabled(true);
+        } else {
+            setStyleInput({});
+            setInfo(null);
+            setButtonDisabled(test(formData));
+        }
+    }, [formData, student]);
+    useEffect(() => {
+        target.current.focus();
+    }, []);
     return (
         <Form action="/student" className={styles.form} onSubmit={handleSubmit}>
             <Form.Group className={formGroup}>
@@ -62,8 +72,10 @@ function FormAdd({ formGroup }) {
                     onChange={handleInputChange}
                     // onFocus={handleFocus}
                     value={formData.MSSV}
+                    ref={target}
+                    style={styleInput}
                 />
-                {/* {inputClass.MSSV[1]} */}
+                {info}
             </Form.Group>
             <Form.Group className={formGroup}>
                 <Form.Label>Họ và tên sinh viên</Form.Label>
@@ -155,7 +167,7 @@ function FormAdd({ formGroup }) {
                 />
                 {/* {inputClass.Name[1]} */}
             </Form.Group>
-            <div className={styles.costumebutton}>
+            <div className={styles.costumebutton} onClick={event}>
                 <Button
                     variant="primary"
                     className={styles.customs_button}

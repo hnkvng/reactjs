@@ -1,15 +1,12 @@
-import { InitFormData, InitClassInput } from './init';
-import styles from './main.module.css';
+import { InitFormData } from './init';
 
 //Action
 const ADD_ACTITON = 'add';
-const ADD_ERROR = 'error';
 const CHANGE_ACTION = 'change';
 const INITIALIZE = 'default';
 const CLEAR_DATA = 'clear';
 //DATA
 const DATA = new InitFormData();
-const ClASS = new InitClassInput();
 //Data except
 
 class DataExcept {
@@ -36,12 +33,12 @@ class DataExcept {
 }
 
 class Handle {
-    setPayload(name, type, payload, set) {
+    setPayload(name, type, payload, status) {
         return {
             name,
             type,
             payload,
-            set,
+            status,
         };
     }
     setInfo(name, title) {
@@ -82,6 +79,7 @@ class Handle {
 const check = new Handle();
 const dataCheck = new DataExcept();
 
+//function
 function testCase(name, checkData, data) {
     const nameExcept = ['Class', 'QT', 'GK', 'CK', 'Date'];
     const setInfo = check.setInfo;
@@ -108,7 +106,6 @@ function testCase(name, checkData, data) {
                     new Date(data[name]).getFullYear() >
                     new Date().getFullYear(),
             };
-            console.log();
             break;
         case 'Faculty':
             checked = {
@@ -138,7 +135,7 @@ function testCase(name, checkData, data) {
             };
             break;
         default:
-            throw new Error('value invalid');
+            throw new Error('Value invalid');
     }
     if (checked.test) {
         return setInfo(name, 'error');
@@ -146,4 +143,22 @@ function testCase(name, checkData, data) {
     return setInfo(name, 'success', '');
 }
 
-export { Handle };
+function test(formData) {
+    for (let name in formData) {
+        if (formData[name] === '') {
+            return true;
+        }
+    }
+    return false;
+}
+
+function sameId(formDataId, dataId) {
+    for (let index in dataId) {
+        if (dataId[index].MSSV === formDataId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+export { Handle, test, sameId };

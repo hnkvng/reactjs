@@ -38,25 +38,4 @@ class InitFormData {
     }
 }
 
-class InitClassInput {
-    #initClassInput = {
-        MSSV: [],
-        Name: [],
-        Date: [],
-        Faculty: [],
-        QT: [],
-        GK: [],
-        CK: [],
-        Class: [],
-    };
-    getClass() {
-        return this.#initClassInput;
-    }
-    changeClass(listName) {
-        for (let name of listName) {
-            // console.log(name);
-        }
-    }
-}
-
-export { InitFormData, InitClassInput };
+export { InitFormData };

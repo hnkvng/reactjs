@@ -31,19 +31,12 @@
     display: flex;
     justify-content: center;
 }
-.success
-{
-    border: 1px solid rgb(57, 206, 132);
-}
-.error
-{
-    border: 1px solid red;
-}
-.info
+.log_info
 {
     color: red;
 }
-small
+.input_error
 {
-    color: red;
+    border: red;
 }
+

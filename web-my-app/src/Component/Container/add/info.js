@@ -1,53 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import OutputInfo from './info/out';
+import styles from './info/main.module.css';
 
-function Info({ data }) {
-    setElements([
-        ...elements,
-        {
-            id: elements.length + 1,
-            isVisible: true,
-            timeId: setTime(),
-        },
-    ]);
-    setInfo(<Info data={props.success}></Info>);
-    setElements([
-        ...elements,
-        {
-            id: elements.length + 1,
-            isVisible: true,
-        },
-    ]);
-    setInfo(<Info data={props.error}></Info>);
-    setTime();
-    setElements([
-        ...elements,
-        {
-            id: elements.length + 1,
-            isVisible: true,
-            timeId: setTime(),
-        },
-    ]);
-    setInfo(<Info data={props.warning}></Info>);
-    const setTime = () => {
-        const id = setTimeout(() => {
-            setElements((prevElements) =>
-                prevElements.map((el) =>
-                    el.id === elements.length + 1
-                        ? { ...el, isVisible: false, timeId: null }
-                        : el,
-                ),
-            );
-        }, 4000);
-        return id;
-    };
+function Info({ elements, info, setElements }) {
+    const parent = useRef();
     const handleClose = (event) => {
-        const close = event.target.closest(`.${styleF.toast_close}`);
-        const card = event.target.closest(`.${styleF.toast}`);
+        const close = event.target.closest(`.${styles.toast_close}`);
+        const card = event.target.closest(`.${styles.toast}`);
         if (close && card) {
             for (let index in elements) {
                 if (parent.current.childNodes[index] === card) {
                     clearTimeout(elements[index].timeId);
+                    console.log(elements);
                     setElements((prevElements) =>
                         prevElements.map((el) =>
                             el.id === parseInt(index) + 1
@@ -70,9 +34,15 @@ function Info({ data }) {
             }
         }
     });
-    <div id={styleF.toast} onClick={handleClose} ref={parent}>
-        {elements.map((el) => el.isVisible && info)}
-    </div>;
-    return <OutputInfo {...data}></OutputInfo>;
+    return (
+        <div id={styles.toast} onClick={handleClose} ref={parent}>
+            {elements.map(
+                (el) =>
+                    el.isVisible && (
+                        <OutputInfo key={el.id} {...info}></OutputInfo>
+                    ),
+            )}
+        </div>
+    );
 }
 export default Info;

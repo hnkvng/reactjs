@@ -10,17 +10,17 @@ const props = {
     },
     error: {
         info: 'Error',
-        des: 'Thêm sinh viên không thành công, liên hệ quản trị viên',
+        des: 'Thêm sinh viên không thành công',
         icon: <i className="fa-solid fa-circle-xmark"></i>,
         iconClose: <i className="fa-solid fa-xmark"></i>,
         theme: styles.toast_error,
     },
-    warning: {
-        info: 'Warning',
-        des: 'Thông tin sinh viên sai hoặc thiếu',
-        icon: <i className="fa-solid fa-circle-exclamation"></i>,
+    info: {
+        info: 'info',
+        des: 'Dọn dẹp thành công',
+        icon: <i class="fa-solid fa-circle-info"></i>,
         iconClose: <i className="fa-solid fa-xmark"></i>,
-        theme: styles.toast_warning,
+        theme: styles.toast_info,
     },
 };
 export default props;
