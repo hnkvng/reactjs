@@ -38,7 +38,7 @@ function FormAdd({
             const response = await axios.put(editApi, formData);
             setTimeout(() => {
                 nav('/student');
-            }, 500);
+            }, 1000);
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
@@ -50,7 +50,9 @@ function FormAdd({
         target.current.focus();
         try {
             const response = await axios.post(addApi, formData);
-
+            setTimeout(() => {
+                nav('/student');
+            }, 1000);
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);

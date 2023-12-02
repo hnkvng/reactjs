@@ -1,14 +1,14 @@
-import FormAdd from '../add/form';
+import FormAdd from '../../add/form';
 import React, { useState, useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from '../add/main.module.css';
+import styles from '../../add/main.module.css';
 import clsx from 'clsx';
 import axios from 'axios';
-import Info from '../add/info';
-import props from '../add/info/props';
-import { studentApi } from '../../../Api';
-import { InitFormData } from '../add/init';
-import { Handle } from '../add/handle';
+import Info from '../../add/info';
+import props from '../../add/info/props';
+import { studentApi } from '../../../../Api';
+import { InitFormData } from '../../add/init';
+import { Handle } from '../../add/handle';
 
 function Edit() {
     const nameButton = 'Thay đổi';

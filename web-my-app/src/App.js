@@ -7,7 +7,7 @@ import Student from './Component/Container/student.js';
 import Notpage from './Component/Container/notpage.js';
 import Header from './Component/Layout/header.js';
 import Footer from './Component/Layout/footer.js';
-import Edit from './Component/Container/student/edit.js';
+import Edit from './Component/Container/class/student/edit.js';
 
 function App() {
     return (

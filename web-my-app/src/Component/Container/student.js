@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './student/table';
+import Table from './class/student/table';
 
 function Student() {
     return <Table></Table>;

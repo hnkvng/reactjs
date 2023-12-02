@@ -52,7 +52,7 @@ function Container() {
         return id;
     };
     useEffect(() => {
-        const getApi = async () => {
+        const callApiStudent = async () => {
             await axios
                 .get(studentApi)
                 .then((response) => {
@@ -62,7 +62,7 @@ function Container() {
                     console.log('Error', error);
                 });
         };
-        getApi();
+        callApiStudent();
     }, []);
     const dataInfo = {
         elements: [] && elements,
